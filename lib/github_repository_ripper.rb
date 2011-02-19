@@ -7,10 +7,10 @@ class GitHubRepositoryRipper
 
   class << self
 
-    def rip_repositories
+    def rip_repositories(languages, pages_to_rip)
       all_repositories = []
-      ['C#', 'C++', 'Python', 'Ruby'].each do |language|
-        (1..30).each do |page|
+      languages.each do |language|
+        (1..pages_to_rip).each do |page|
           all_repositories << get_repositories(language, page)
         end
       end

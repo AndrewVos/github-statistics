@@ -15,40 +15,39 @@ describe GitHubRepositoryRipper do
   describe ".rip_repositories" do
 
     before :each do
+      @languages = ["language1", "language2"]
+      @pages_to_rip = 2
+
       @json = <<-JSON
         {"repositories":[
           {"type":"repo","open_issues":1,"forks":3,"language":"Ruby","url":"https://github.com/rsim/ruby-plsql","has_issues":true,"homepage":"","has_downloads":true,"pushed":"2010/12/10 04:05:40 -0800","fork":false,"pushed_at":"2010/12/10 04:05:40 -0800","followers":38,"created_at":"2008/04/19 07:49:12 -0700","score":0.3126592,"size":296,"private":false,"created":"2008/04/19 07:49:12 -0700","name":"ruby-plsql","owner":"rsim","has_wiki":true,"watchers":38,"username":"rsim","description":"ruby-plsql gem provides simple Ruby API for calling Oracle PL/SQL procedures. It could be used both for accessing Oracle PL/SQL API procedures in legacy applications as well as it could be used to create PL/SQL unit tests using Ruby testing libraries."}
         ]}
       JSON
 
-      @repository = [
-        {:user_id => "rsim", :repository => "ruby-plsql"}
-      ]
-
+      @repositories = [{:user_id => "rsim", :repository => "ruby-plsql"}]
       @all_repositories = []
-      (1..120).each { @all_repositories << @repository }
-      @all_repositories.flatten!
+      (1..(@pages_to_rip* @languages.size)).each { @all_repositories << @repositories[0] }
 
-      GitHubRepositoryRipper.stub!(:get_repositories).times.and_return(@repository)
+      GitHubRepositoryRipper.stub!(:get_repositories).exactly(@pages_to_rip * @languages.size).times.and_return(@repositories)
     end
 
     it "rips all languages" do
       expected_messages = []
-      ['C#', 'C++', 'Python', 'Ruby'].each do |language|
-        (1..30).each do |page|
+      @languages.each do |language|
+        (1..@pages_to_rip).each do |page|
           expected_messages.push([language, page])
         end
       end
-      GitHubRepositoryRipper.should_receive(:get_repositories).exactly(120).times do |language, page|
+      GitHubRepositoryRipper.should_receive(:get_repositories).exactly(@pages_to_rip * @languages.size).times do |language, page|
         expected_messages.delete([language, page])
       end
-      GitHubRepositoryRipper.rip_repositories
+      GitHubRepositoryRipper.rip_repositories(@languages, @pages_to_rip)
       expected_messages.size.should == 0
     end
 
     it "converts the data to yaml" do
       YAML.should_receive(:dump).with(@all_repositories)
-      GitHubRepositoryRipper.rip_repositories
+      GitHubRepositoryRipper.rip_repositories(@languages, @pages_to_rip)
     end
 
     it "writes the yaml to a file" do
@@ -56,7 +55,7 @@ describe GitHubRepositoryRipper do
       file = mock(:file)
       File.should_receive(:open).with('repositories.yml', 'w').and_yield(file)
       file.should_receive(:write).with("yaml!")
-      GitHubRepositoryRipper.rip_repositories
+      GitHubRepositoryRipper.rip_repositories(@languages, @pages_to_rip)
     end
   end
 
