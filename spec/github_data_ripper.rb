@@ -18,6 +18,8 @@ describe GitHubDataRipper do
       @all_repositories = []
       (1..120).each { @all_repositories << @repository }
       @all_repositories.flatten!
+
+      GitHubDataRipper.stub!(:get_repositories).times.and_return(@repository)
     end
 
     it "rips all languages" do
@@ -35,8 +37,15 @@ describe GitHubDataRipper do
     end
 
     it "converts the data to yaml" do
-      GitHubDataRipper.should_receive(:get_repositories).exactly(120).times.and_return(@repository)
       YAML.should_receive(:dump).with(@all_repositories)
+      GitHubDataRipper.rip_data
+    end
+
+    it "writes the yaml to a file" do
+      YAML.should_receive(:dump).with(@all_repositories).and_return("yaml!")
+      file = mock(:file)
+      File.should_receive(:open).with('repositories.yml', 'w').and_yield(file)
+      file.should_receive(:write).with("yaml!")
       GitHubDataRipper.rip_data
     end
   end

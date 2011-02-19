@@ -15,7 +15,9 @@ class GitHubDataRipper
         end
       end
       all_repositories.flatten!
-      YAML.dump(all_repositories)
+      File.open('repositories.yml', 'w') do |file|
+        file.write(YAML.dump(all_repositories))
+      end
     end
 
     def get_repositories(language, page)
