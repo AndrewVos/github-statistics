@@ -2,6 +2,12 @@ require File.join(File.dirname(__FILE__), '..', 'lib', 'github_data_ripper')
 
 describe GitHubDataRipper do
 
+  before :each do
+    file = mock(:file)
+    file.stub!(:write)
+    File.stub!(:open).and_yield(file)
+  end
+
   describe ".rip_data" do
 
     before :each do
