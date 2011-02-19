@@ -74,6 +74,16 @@ describe GitHubCommitRipper do
       @file.should_receive(:write).with(YAML::dump(@commits))
       GitHubCommitRipper.rip_commits(@repository)
     end
+
+    it "doesn't write to file if the file already exists" do
+      GitHubCommitRipper.should_not_receive(:get_json)
+      path = "commits[bob.dotfiles].yml"
+      File.should_receive(:exist?).with(path).and_return(true)
+      File.should_not_receive(:open)
+      @file.should_not_receive(:write)
+      GitHubCommitRipper.rip_commits(@repository)
+    end
+
   end
 
   describe ".get_json" do

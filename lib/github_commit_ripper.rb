@@ -15,9 +15,10 @@ class GitHubCommitRipper
     end
 
     def rip_commits(repository)
+      path = "commits[#{repository[:user_id]}.#{repository[:repository]}].yml"
       commits = []
-
       page = 1
+      return if File.exist?(path)
       loop do
         break if page == 11
         puts "Commit page #{page}"
@@ -30,7 +31,6 @@ class GitHubCommitRipper
       end
       commits.flatten!
 
-      path = "commits[#{repository[:user_id]}.#{repository[:repository]}].yml"
       File.open(path, 'w') do |file|
         file.write(YAML::dump(commits))
       end
