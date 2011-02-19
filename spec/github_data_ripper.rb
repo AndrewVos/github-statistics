@@ -1,5 +1,6 @@
 require 'net/http'
 require 'uri'
+require 'json'
 
 class GitHubDataRipper
 
@@ -23,7 +24,12 @@ class GitHubDataRipper
           sleep(1)
         end
       end
-      json
+      parsed_json = JSON.parse(json)
+      data = []
+      parsed_json["repositories"].each do |repository|
+        data << {:user_id => repository["username"], :repository => repository["name"]}
+      end
+      data
     end
 
   end
@@ -55,23 +61,32 @@ describe GitHubDataRipper do
     before :each do
       @url = %{http://github.com/api/v2/json/repos/search/+?type=Repositories&language=ruby&start_page=1}
       @uri = URI.parse(@url)
+      @json = <<-JSON
+        {"repositories":[
+          {"type":"repo","open_issues":1,"forks":3,"language":"Ruby","url":"https://github.com/rsim/ruby-plsql","has_issues":true,"homepage":"","has_downloads":true,"pushed":"2010/12/10 04:05:40 -0800","fork":false,"pushed_at":"2010/12/10 04:05:40 -0800","followers":38,"created_at":"2008/04/19 07:49:12 -0700","score":0.3126592,"size":296,"private":false,"created":"2008/04/19 07:49:12 -0700","name":"ruby-plsql","owner":"rsim","has_wiki":true,"watchers":38,"username":"rsim","description":"ruby-plsql gem provides simple Ruby API for calling Oracle PL/SQL procedures. It could be used both for accessing Oracle PL/SQL API procedures in legacy applications as well as it could be used to create PL/SQL unit tests using Ruby testing libraries."},
+          {"type":"repo","open_issues":0,"forks":7,"language":"Ruby","url":"https://github.com/richdownie/watircuke","has_issues":true,"homepage":"","has_downloads":true,"pushed":"2010/03/22 17:27:24 -0700","fork":false,"pushed_at":"2010/03/22 17:27:24 -0700","followers":31,"created_at":"2009/06/10 13:34:35 -0700","score":0.40881574,"size":152,"private":false,"created":"2009/06/10 13:34:35 -0700","name":"watircuke","owner":"richdownie","has_wiki":true,"watchers":31,"username":"richdownie","description":"The First Cross-Browser, HTML Element Agnostic, Automated Ruby Testing Framework"}
+        ]}
+      JSON
       URI.should_receive(:parse).once.with(@url).and_return(@uri)
     end
 
     it "should get the url" do
-      Net::HTTP.should_receive(:get).once.with(@uri).and_return("json")
+      Net::HTTP.should_receive(:get).once.with(@uri).and_return(@json)
       GitHubDataRipper.get_repositories("ruby", 1)
     end
 
-    it "should return the json" do
-      Net::HTTP.should_receive(:get).once.with(@uri).and_return("my json stuff")
-      GitHubDataRipper.get_repositories("ruby", 1).should == "my json stuff"
+    it "parses the json and returns repository information" do
+     Net::HTTP.should_receive(:get).once.with(@uri).and_return(@json)
+      GitHubDataRipper.get_repositories("ruby", 1).should == [
+        {:user_id => "rsim", :repository => "ruby-plsql"},
+        {:user_id => "richdownie", :repository => "watircuke"}
+      ]
     end
 
     context "with one rate limit exceeded response and one valid response" do
 
       before :each do
-        Net::HTTP.stub!(:get).and_return(%{{"error":["Rate Limit Exceeded for 127.0.0.1"]}}, "some json")
+        Net::HTTP.stub!(:get).and_return(%{{"error":["Rate Limit Exceeded for 127.0.0.1"]}}, @json)
       end
 
       it "tries again if it gets a rate limit exceeded response" do
@@ -90,7 +105,7 @@ describe GitHubDataRipper do
 
       before :each do
         rate_limit_exceeded = %{{"error":["Rate Limit Exceeded for 127.0.0.1"]}}
-        Net::HTTP.stub!(:get).and_return(rate_limit_exceeded, rate_limit_exceeded, "valid json")
+        Net::HTTP.stub!(:get).and_return(rate_limit_exceeded, rate_limit_exceeded, @json)
       end
 
       it "tries multiple times if it gets a rate limit exceeded response" do
