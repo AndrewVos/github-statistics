@@ -92,7 +92,7 @@ describe GitHubCommitRipper do
       @uri = URI.parse(@url)
       @expected_json = "Here's your json good Sir!"
       @rate_limit_exceeded = %{{"error":["Rate Limit Exceeded for 127.0.0.1"]}}
-      @error_not_found = %{{"error"=>"Not Found"}}
+      @error_not_found = %{{"error":"Not Found"}}
       GitHubCommitRipper.stub!(:sleep)
       URI.should_receive(:parse).with(@url).once.and_return(@uri)
     end
