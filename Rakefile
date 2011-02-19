@@ -8,9 +8,7 @@ task :rip_repositories do
 end
 
 desc "Rip all commits from all repositories"
-task :rip_commits do
-  yaml = YAML.load_file('repositories.yml')
-  yaml.each do |repository|
-    GitHubCommitRipper.rip_commits(repository[:user_id], repository[:name])
-  end
+task :rip_all_commits do
+  repositories = YAML.load_file('repositories.yml')
+  GitHubCommitRipper.rip_all_commits(repositories)
 end
