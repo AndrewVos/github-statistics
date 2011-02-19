@@ -1,4 +1,5 @@
 require File.join(File.dirname(__FILE__), 'lib', 'github_repository_ripper')
+require File.join(File.dirname(__FILE__), 'lib', 'github_commit_ripper')
 
 desc "Rip repository data"
 task :rip_repositories do
