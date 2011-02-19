@@ -51,6 +51,12 @@ describe GitHubCommitRipper do
       GitHubCommitRipper.rip_commits(@repository)
     end
 
+    it "stops when it has 10 pages" do
+      ten_repositories = (1..11).map { |number| @repository }
+      GitHubCommitRipper.should_receive(:get_json).exactly(10).times.and_return(@valid_json)
+      GitHubCommitRipper.rip_commits(@repository)
+    end
+
     it "returns commit data" do
       GitHubCommitRipper.should_receive(:get_json).and_return(@valid_json, nil)
       GitHubCommitRipper.rip_commits(@repository).should == @commits
