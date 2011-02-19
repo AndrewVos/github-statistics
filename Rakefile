@@ -18,3 +18,13 @@ namespace :rip do
 
 end
 
+namespace :stats do
+
+  desc "Shows all profanity in the commits"
+  task :profanity do
+    words = %w{shit piss fuck cunt cocksucker motherfucker tits zomg omg wtf}.join("|")
+    system "egrep -h '#{words}' commit*.yml"
+  end
+
+end
+
