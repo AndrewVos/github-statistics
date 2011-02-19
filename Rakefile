@@ -6,3 +6,11 @@ task :rip_repositories do
   pages_to_rip = 30
   GitHubRepositoryRipper.rip_repositories(languages, pages_to_rip)
 end
+
+desc "Rip all commits from all repositories"
+task :rip_commits do
+  yaml = YAML.load_file('repositories.yml')
+  yaml.each do |repository|
+    GitHubCommitRipper.rip_commits(repository[:user_id], repository[:name])
+  end
+end
