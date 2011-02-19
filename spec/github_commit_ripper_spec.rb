@@ -92,6 +92,7 @@ describe GitHubCommitRipper do
       @uri = URI.parse(@url)
       @expected_json = "Here's your json good Sir!"
       @rate_limit_exceeded = %{{"error":["Rate Limit Exceeded for 127.0.0.1"]}}
+      @error_not_found = %{{"error"=>"Not Found"}}
       GitHubCommitRipper.stub!(:sleep)
       URI.should_receive(:parse).with(@url).once.and_return(@uri)
     end
@@ -118,13 +119,13 @@ describe GitHubCommitRipper do
 
     end
 
-    context "no json response" do
+    context "with error not found response" do
 
       before :each do
-        Net::HTTP.stub!(:get).with(@uri).once.and_return("")
+        Net::HTTP.stub!(:get).with(@uri).and_return(@error_not_found)
       end
 
-      it "returns nil if there is no json" do
+      it "returns nil if it gets an error not found response" do
         GitHubCommitRipper.get_json(@url).should == nil
       end
 

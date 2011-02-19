@@ -29,6 +29,9 @@ class GitHubCommitRipper
         json = get_json(url)
         break if json == nil
         json = JSON.parse(json)
+        if json["commits"] == nil
+          puts json
+        end
         commits << json["commits"].map { |commit| { :language => repository[:language], :message => commit["message"] } }
         page = page + 1
       end
@@ -40,9 +43,9 @@ class GitHubCommitRipper
       json = nil
       while json == nil
         json = Net::HTTP.get(uri)
-        return nil if json.empty?
         json = nil if json =~ /\{"error":\["Rate Limit Exceeded for \d+.\d+.\d+.\d+"\]\}/
-          sleep(1) if json == nil
+        return nil if json =~ /\{"error"=>"Not Found"\}/
+        sleep(1) if json == nil
       end
       json
     end
