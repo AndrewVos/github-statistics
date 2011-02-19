@@ -77,6 +77,12 @@ describe GitHubCommitRipper do
       ]
     end
 
+    it "outputs information about the current status of ripping" do
+      GitHubCommitRipper.should_receive(:get_json).and_return(@valid_json, nil)
+      GitHubCommitRipper.should_receive(:puts).with("Commit page 1")
+      GitHubCommitRipper.rip_commits(@repository)
+    end
+
   end
 
   describe ".get_json" do

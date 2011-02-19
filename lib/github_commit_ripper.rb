@@ -24,6 +24,7 @@ class GitHubCommitRipper
 
       page = 1
       loop do
+        puts "Commit page #{page}"
         url = %{http://github.com/api/v2/json/commits/list/#{repository[:user_id]}/#{repository[:repository]}/master/?page=#{page}}
         json = get_json(url)
         break if json == nil
