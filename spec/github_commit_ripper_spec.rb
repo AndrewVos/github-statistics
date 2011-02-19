@@ -14,7 +14,9 @@ class GitHubCommitRipper
         commits << rip_commits(repositories[index])
       end
       commits.flatten!
-      YAML::dump(commits)
+      File.open('commits.yml', 'w') do |file|
+        file.write(YAML::dump(commits))
+      end
     end
 
     def rip_commits(repository)
@@ -54,6 +56,9 @@ describe GitHubCommitRipper do
     @repository = { :language => "ruby", :user_id => "bob", :repository => "dotfiles" }
     @repositories = [@repository]
     GitHubCommitRipper.stub!(:puts)
+    @file = mock(:file)
+    @file.stub!(:write)
+    File.stub!(:open).and_yield(@file)
   end
 
   describe ".rip_all_commits" do
@@ -78,6 +83,19 @@ describe GitHubCommitRipper do
       GitHubCommitRipper.should_receive(:puts).with("Repository 1 of 1")
       GitHubCommitRipper.rip_all_commits(@repositories)
     end
+
+    it "writes commit data out to a file" do
+     commits = [
+        { :language => "ruby", :message => "fix ruby rev-list implementation not handling array of refs"},
+        { :language => "ruby", :message => "update History for argv fixes" }
+      ]
+      GitHubCommitRipper.should_receive(:rip_commits).with(@repository).and_return(commits)
+      File.should_receive(:open).with('commits.yml', 'w').and_yield(@file)
+      expected_yaml = YAML::dump(commits)
+      @file.should_receive(:write).with(expected_yaml)
+      GitHubCommitRipper.rip_all_commits(@repositories)
+    end
+
   end
 
   describe ".rip_commits" do
