@@ -1,0 +1,2 @@
+#!/bin/sh
+grep -h message commit*.yml | sort | uniq -c | sort -r | less
