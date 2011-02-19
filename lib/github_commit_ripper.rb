@@ -18,7 +18,9 @@ class GitHubCommitRipper
       path = "commits[#{repository[:user_id]}.#{repository[:repository]}].yml"
       commits = []
       page = 1
-      return if File.exist?(path)
+      if File.exist?(path)
+        return if File.size(path) > 0
+      end
       loop do
         break if page == 11
         puts "Commit page #{page}"
@@ -32,7 +34,11 @@ class GitHubCommitRipper
       commits.flatten!
 
       File.open(path, 'w') do |file|
+        begin
         file.write(YAML::dump(commits))
+        rescue
+          puts "Error writing #{repository[:user_id]}/#{repository[:repository]}"
+        end
       end
       commits
     end

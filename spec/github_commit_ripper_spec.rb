@@ -39,6 +39,7 @@ describe GitHubCommitRipper do
         { :language => "ruby", :message => "fix ruby rev-list implementation not handling array of refs"},
         { :language => "ruby", :message => "update History for argv fixes" }
       ]
+      @output_path = "commits[bob.dotfiles].yml"
     end
 
     it "calls .get_json with different pages until it returns nil" do
@@ -75,12 +76,20 @@ describe GitHubCommitRipper do
       GitHubCommitRipper.rip_commits(@repository)
     end
 
-    it "doesn't write to file if the file already exists" do
+    it "doesn't write to file if the file already exists and is not empty" do
+      File.should_receive(:exist?).with(@output_path).and_return(true)
+      File.should_receive(:size).with(@output_path).and_return(100)
       GitHubCommitRipper.should_not_receive(:get_json)
-      path = "commits[bob.dotfiles].yml"
-      File.should_receive(:exist?).with(path).and_return(true)
       File.should_not_receive(:open)
       @file.should_not_receive(:write)
+      GitHubCommitRipper.rip_commits(@repository)
+    end
+
+    it "outputs a message if writing the file failed" do
+      GitHubCommitRipper.should_receive(:get_json).and_return(@valid_json, nil)
+      File.should_receive(:open).with("commits[bob.dotfiles].yml", 'w').and_yield(@file)
+      @file.should_receive(:write).and_throw(RuntimeError)
+      GitHubCommitRipper.should_receive(:puts).with("Error writing bob/dotfiles")
       GitHubCommitRipper.rip_commits(@repository)
     end
 
