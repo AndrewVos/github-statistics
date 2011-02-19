@@ -1,17 +1,21 @@
 require 'net/http'
 require 'uri'
 require 'json'
+require 'yaml'
 
 class GitHubDataRipper
 
   class << self
 
     def rip_data
+      all_repositories = []
       ['C#', 'C++', 'Python', 'Ruby'].each do |language|
         (1..30).each do |page|
-          get_repositories(language, page)
+          all_repositories << get_repositories(language, page)
         end
       end
+      all_repositories.flatten!
+      YAML.dump(all_repositories)
     end
 
     def get_repositories(language, page)
