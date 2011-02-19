@@ -34,7 +34,7 @@ class GitHubRepositoryRipper
       parsed_json = JSON.parse(json)
       data = []
       parsed_json["repositories"].each do |repository|
-        data << {:user_id => repository["username"], :repository => repository["name"]}
+        data << {:language => repository["language"], :user_id => repository["username"], :repository => repository["name"]}
       end
       data
     end

@@ -24,7 +24,7 @@ describe GitHubRepositoryRipper do
         ]}
       JSON
 
-      @repositories = [{:user_id => "rsim", :repository => "ruby-plsql"}]
+      @repositories = [{:language => "bla bla", :user_id => "rsim", :repository => "ruby-plsql"}]
       @all_repositories = []
       (1..(@pages_to_rip* @languages.size)).each { @all_repositories << @repositories[0] }
 
@@ -86,8 +86,8 @@ describe GitHubRepositoryRipper do
     it "parses the json and returns repository information" do
       Net::HTTP.should_receive(:get).once.with(@uri).and_return(@json)
       GitHubRepositoryRipper.get_repositories("ruby", 1).should == [
-        {:user_id => "rsim", :repository => "ruby-plsql"},
-        {:user_id => "richdownie", :repository => "watircuke"}
+        {:language => "Ruby", :user_id => "rsim", :repository => "ruby-plsql"},
+        {:language => "Ruby", :user_id => "richdownie", :repository => "watircuke"}
       ]
     end
 
