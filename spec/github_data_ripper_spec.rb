@@ -70,13 +70,18 @@ describe GitHubDataRipper do
       URI.should_receive(:parse).once.with(@url).and_return(@uri)
     end
 
+    it "writes out the page and language" do
+      GitHubDataRipper.should_receive(:puts).with("ruby page 1")
+      GitHubDataRipper.get_repositories("ruby", 1)
+    end
+
     it "should get the url" do
       Net::HTTP.should_receive(:get).once.with(@uri).and_return(@json)
       GitHubDataRipper.get_repositories("ruby", 1)
     end
 
     it "parses the json and returns repository information" do
-     Net::HTTP.should_receive(:get).once.with(@uri).and_return(@json)
+      Net::HTTP.should_receive(:get).once.with(@uri).and_return(@json)
       GitHubDataRipper.get_repositories("ruby", 1).should == [
         {:user_id => "rsim", :repository => "ruby-plsql"},
         {:user_id => "richdownie", :repository => "watircuke"}

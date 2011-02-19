@@ -21,6 +21,7 @@ class GitHubDataRipper
     end
 
     def get_repositories(language, page)
+      puts %{#{language} page #{page}}
       uri = URI.parse %{http://github.com/api/v2/json/repos/search/+?type=Repositories&language=#{language}&start_page=#{page}}
       json = nil
       while json == nil
