@@ -8,14 +8,9 @@ class GitHubCommitRipper
   class << self
 
     def rip_all_commits(repositories)
-      commits = []
       repositories.each_index do |index|
         puts "Repository #{index+1} of #{repositories.size}"
-        commits << rip_commits(repositories[index])
-      end
-      commits.flatten!
-      File.open('commits.yml', 'w') do |file|
-        file.write(YAML::dump(commits))
+        rip_commits(repositories[index])
       end
     end
 
@@ -32,7 +27,13 @@ class GitHubCommitRipper
         commits << json["commits"].map { |commit| { :language => repository[:language], :message => commit["message"] } }
         page = page + 1
       end
-      commits.flatten
+      commits.flatten!
+
+      path = "commits[#{repository[:user_id]}.#{repository[:repository]}].yml"
+      File.open(path, 'w') do |file|
+        file.write(YAML::dump(commits))
+      end
+      commits
     end
 
     def get_json(url)

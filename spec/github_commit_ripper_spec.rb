@@ -18,31 +18,9 @@ describe GitHubCommitRipper do
       GitHubCommitRipper.rip_all_commits(@repositories)
     end
 
-    it "converts commits to yaml" do
-      commits = [
-        { :language => "ruby", :message => "fix ruby rev-list implementation not handling array of refs"},
-        { :language => "ruby", :message => "update History for argv fixes" }
-      ]
-      GitHubCommitRipper.should_receive(:rip_commits).with(@repository).and_return(commits)
-      YAML.should_receive(:dump).with(commits)
-      GitHubCommitRipper.rip_all_commits(@repositories)
-    end
-
     it "outputs information about the current progress" do
       GitHubCommitRipper.should_receive(:rip_commits).with(@repository).and_return("some json")
       GitHubCommitRipper.should_receive(:puts).with("Repository 1 of 1")
-      GitHubCommitRipper.rip_all_commits(@repositories)
-    end
-
-    it "writes commit data out to a file" do
-     commits = [
-        { :language => "ruby", :message => "fix ruby rev-list implementation not handling array of refs"},
-        { :language => "ruby", :message => "update History for argv fixes" }
-      ]
-      GitHubCommitRipper.should_receive(:rip_commits).with(@repository).and_return(commits)
-      File.should_receive(:open).with('commits.yml', 'w').and_yield(@file)
-      expected_yaml = YAML::dump(commits)
-      @file.should_receive(:write).with(expected_yaml)
       GitHubCommitRipper.rip_all_commits(@repositories)
     end
 
@@ -57,6 +35,10 @@ describe GitHubCommitRipper do
           {"parents":[{"id":"358df98aa0ada3c0bab7bda3aa52a38e1adb0dfb"}],"author":{"name":"Ryan Tomayko","login":"rtomayko","email":"rtomayko@gmail.com"},"url":"/mojombo/grit/commit/ffac829d5c552985d266f328277f96e176aad4a7","id":"ffac829d5c552985d266f328277f96e176aad4a7","committed_date":"2011-02-11T08:50:01-08:00","authored_date":"2011-02-11T08:50:01-08:00","message":"update History for argv fixes","tree":"4d27deaf224d8bbca836446cd1a76c140b66aa77","committer":{"name":"Ryan Tomayko","login":"rtomayko","email":"rtomayko@gmail.com"}}
         ]}
       JSON
+      @commits = [
+        { :language => "ruby", :message => "fix ruby rev-list implementation not handling array of refs"},
+        { :language => "ruby", :message => "update History for argv fixes" }
+      ]
     end
 
     it "calls .get_json with different pages until it returns nil" do
@@ -71,10 +53,7 @@ describe GitHubCommitRipper do
 
     it "returns commit data" do
       GitHubCommitRipper.should_receive(:get_json).and_return(@valid_json, nil)
-      GitHubCommitRipper.rip_commits(@repository).should == [
-        { :language => "ruby", :message => "fix ruby rev-list implementation not handling array of refs"},
-        { :language => "ruby", :message => "update History for argv fixes" }
-      ]
+      GitHubCommitRipper.rip_commits(@repository).should == @commits
     end
 
     it "outputs information about the current status of ripping" do
@@ -83,6 +62,12 @@ describe GitHubCommitRipper do
       GitHubCommitRipper.rip_commits(@repository)
     end
 
+    it "writes commit data to file" do
+      GitHubCommitRipper.should_receive(:get_json).and_return(@valid_json, nil)
+      File.should_receive(:open).with("commits[bob.dotfiles].yml", 'w').and_yield(@file)
+      @file.should_receive(:write).with(YAML::dump(@commits))
+      GitHubCommitRipper.rip_commits(@repository)
+    end
   end
 
   describe ".get_json" do
