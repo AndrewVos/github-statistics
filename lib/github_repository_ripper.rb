@@ -3,11 +3,11 @@ require 'uri'
 require 'json'
 require 'yaml'
 
-class GitHubDataRipper
+class GitHubRepositoryRipper
 
   class << self
 
-    def rip_data
+    def rip_repositories
       all_repositories = []
       ['C#', 'C++', 'Python', 'Ruby'].each do |language|
         (1..30).each do |page|

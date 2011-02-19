@@ -1,18 +1,18 @@
-require File.join(File.dirname(__FILE__), '..', 'lib', 'github_data_ripper')
+require File.join(File.dirname(__FILE__), '..', 'lib', 'github_repository_ripper')
 
-describe GitHubDataRipper do
+describe GitHubRepositoryRipper do
 
   before :each do
     file = mock(:file)
     file.stub!(:write)
     File.stub!(:open).and_yield(file)
 
-    GitHubDataRipper.stub!(:sleep)
+    GitHubRepositoryRipper.stub!(:sleep)
 
-    GitHubDataRipper.stub!(:puts)
+    GitHubRepositoryRipper.stub!(:puts)
   end
 
-  describe ".rip_data" do
+  describe ".rip_repositories" do
 
     before :each do
       @json = <<-JSON
@@ -29,7 +29,7 @@ describe GitHubDataRipper do
       (1..120).each { @all_repositories << @repository }
       @all_repositories.flatten!
 
-      GitHubDataRipper.stub!(:get_repositories).times.and_return(@repository)
+      GitHubRepositoryRipper.stub!(:get_repositories).times.and_return(@repository)
     end
 
     it "rips all languages" do
@@ -39,16 +39,16 @@ describe GitHubDataRipper do
           expected_messages.push([language, page])
         end
       end
-      GitHubDataRipper.should_receive(:get_repositories).exactly(120).times do |language, page|
+      GitHubRepositoryRipper.should_receive(:get_repositories).exactly(120).times do |language, page|
         expected_messages.delete([language, page])
       end
-      GitHubDataRipper.rip_data
+      GitHubRepositoryRipper.rip_repositories
       expected_messages.size.should == 0
     end
 
     it "converts the data to yaml" do
       YAML.should_receive(:dump).with(@all_repositories)
-      GitHubDataRipper.rip_data
+      GitHubRepositoryRipper.rip_repositories
     end
 
     it "writes the yaml to a file" do
@@ -56,7 +56,7 @@ describe GitHubDataRipper do
       file = mock(:file)
       File.should_receive(:open).with('repositories.yml', 'w').and_yield(file)
       file.should_receive(:write).with("yaml!")
-      GitHubDataRipper.rip_data
+      GitHubRepositoryRipper.rip_repositories
     end
   end
 
@@ -75,18 +75,18 @@ describe GitHubDataRipper do
     end
 
     it "writes out the page and language" do
-      GitHubDataRipper.should_receive(:puts).with("ruby page 1")
-      GitHubDataRipper.get_repositories("ruby", 1)
+      GitHubRepositoryRipper.should_receive(:puts).with("ruby page 1")
+      GitHubRepositoryRipper.get_repositories("ruby", 1)
     end
 
     it "should get the url" do
       Net::HTTP.should_receive(:get).once.with(@uri).and_return(@json)
-      GitHubDataRipper.get_repositories("ruby", 1)
+      GitHubRepositoryRipper.get_repositories("ruby", 1)
     end
 
     it "parses the json and returns repository information" do
       Net::HTTP.should_receive(:get).once.with(@uri).and_return(@json)
-      GitHubDataRipper.get_repositories("ruby", 1).should == [
+      GitHubRepositoryRipper.get_repositories("ruby", 1).should == [
         {:user_id => "rsim", :repository => "ruby-plsql"},
         {:user_id => "richdownie", :repository => "watircuke"}
       ]
@@ -100,12 +100,12 @@ describe GitHubDataRipper do
 
       it "tries again if it gets a rate limit exceeded response" do
         Net::HTTP.should_receive(:get).with(@uri).twice
-        GitHubDataRipper.get_repositories("ruby", 1)
+        GitHubRepositoryRipper.get_repositories("ruby", 1)
       end
 
       it "sleeps for a second if it gets a rate limit exceeded response" do
-        GitHubDataRipper.should_receive(:sleep).with(1).once
-        GitHubDataRipper.get_repositories("ruby", 1)
+        GitHubRepositoryRipper.should_receive(:sleep).with(1).once
+        GitHubRepositoryRipper.get_repositories("ruby", 1)
       end
 
     end
@@ -119,7 +119,7 @@ describe GitHubDataRipper do
 
       it "tries multiple times if it gets a rate limit exceeded response" do
         Net::HTTP.should_receive(:get).with(@uri).exactly(3).times
-        GitHubDataRipper.get_repositories("ruby", 1)
+        GitHubRepositoryRipper.get_repositories("ruby", 1)
       end
 
     end
