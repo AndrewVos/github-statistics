@@ -2,7 +2,9 @@ require 'net/http'
 require 'uri'
 
 class GitHubDataRipper
+
   class << self
+
     def rip_data
       ['C#', 'C++', 'Python', 'Ruby'].each do |language|
         (1..30).each do |page|
@@ -13,13 +15,25 @@ class GitHubDataRipper
 
     def rip_url(url)
       uri = URI.parse(url)
-      json = Net::HTTP.get(uri)
+      json = nil
+      while json == nil
+        json = Net::HTTP.get(uri)
+        if json =~ /\{"error":\["Rate Limit Exceeded for \d+.\d+.\d+.\d+"\]\}/
+          json = nil
+          sleep(1)
+        end
+      end
+      json
     end
+
   end
+
 end
 
 describe GitHubDataRipper do
+
   describe ".rip_data" do
+
     it "rips all languages" do
       expected_urls = []
       ['C#', 'C++', 'Python', 'Ruby'].each do |language|
@@ -33,9 +47,11 @@ describe GitHubDataRipper do
       GitHubDataRipper.rip_data
       expected_urls.size.should == 0
     end
+
   end
 
   describe ".rip_url" do
+
     before :each do
       @url = "http://www.example.org"
       @uri = URI.parse(@url)
@@ -57,5 +73,41 @@ describe GitHubDataRipper do
       Net::HTTP.should_receive(:get).once.with(@uri).and_return("my json stuff")
       GitHubDataRipper.rip_url(@url).should == "my json stuff"
     end
+
+    context "with one rate limit exceeded response and one valid response" do
+
+      before :each do
+        URI.should_receive(:parse).once.with(@url).and_return(@uri)
+        Net::HTTP.stub!(:get).and_return(%{{"error":["Rate Limit Exceeded for 127.0.0.1"]}}, "some json")
+      end
+
+      it "tries again if it gets a rate limit exceeded response" do
+        Net::HTTP.should_receive(:get).with(@uri).twice
+        GitHubDataRipper.rip_url(@url)
+      end
+
+      it "sleeps for a second if it gets a rate limit exceeded response" do
+        GitHubDataRipper.should_receive(:sleep).with(1).once
+        GitHubDataRipper.rip_url(@url)
+      end
+
+    end
+
+    context "with two rate limit exceeded responses and one valid response" do
+
+      before :each do
+        URI.should_receive(:parse).once.with(@url).and_return(@uri)
+        rate_limit_exceeded = %{{"error":["Rate Limit Exceeded for 127.0.0.1"]}}
+        Net::HTTP.stub!(:get).and_return(rate_limit_exceeded, rate_limit_exceeded, "valid json")
+      end
+
+      it "tries multiple times if it gets a rate limit exceeded response" do
+        Net::HTTP.should_receive(:get).with(@uri).exactly(3).times
+        GitHubDataRipper.rip_url(@url)
+      end
+
+    end
+
   end
+
 end
