@@ -28,7 +28,6 @@ class GitHubCommitRipper
         url = %{http://github.com/api/v2/json/commits/list/#{repository[:user_id]}/#{repository[:repository]}/master/?page=#{page}}
         json = get_json(url)
         break if json == nil
-        puts json
         json = JSON.parse(json)
         commits << json["commits"].map { |commit| { :language => repository[:language], :message => commit["message"] } }
         page = page + 1
