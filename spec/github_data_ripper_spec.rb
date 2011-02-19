@@ -6,6 +6,10 @@ describe GitHubDataRipper do
     file = mock(:file)
     file.stub!(:write)
     File.stub!(:open).and_yield(file)
+
+    GitHubDataRipper.stub!(:sleep)
+
+    GitHubDataRipper.stub!(:puts)
   end
 
   describe ".rip_data" do
