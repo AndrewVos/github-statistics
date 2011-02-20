@@ -3,8 +3,7 @@ require 'yaml'
 require File.join(File.dirname(__FILE__), 'lib', 'github_repository_ripper')
 require File.join(File.dirname(__FILE__), 'lib', 'github_commit_ripper')
 
-LANGUAGES_TO_SEARCH = ['C', 'csharp', 'C++', 'Java', 'JavaScript', 'PHP', 'Python', 'Ruby']
-LANGUAGES = ['C', 'C#', 'C++', 'Java', 'JavaScript', 'PHP', 'Python', 'Ruby']
+LANGUAGES_TO_SEARCH = ['C', 'csharp', 'C%2B%2B', 'Java', 'JavaScript', 'PHP', 'Python', 'Ruby']
 
 namespace :rip do
 
@@ -22,10 +21,6 @@ namespace :rip do
 
   desc "Write all commits to one big file"
   task :merge_commits do
-    LANGUAGES.each do |language|
-      File.delete(language) if File.exist?(language)
-    end
-
     all_commits = {}
     Dir.glob('commit*.yml').map do |file|
       puts file
@@ -37,10 +32,10 @@ namespace :rip do
       end
     end
 
-    LANGUAGES.each do |language|
-      output_path = "#{language}.yml"
-      puts language
+    all_commits.keys.each do |language|
+      output_path = "language-commits[#{language}].yml"
       puts output_path
+      File.delete(output_path) if File.exist?(output_path)
       File.open(output_path, 'w') do |file|
         messages = all_commits[language].map { |commit| { :message => commit[:message] } }
         file.puts(YAML.dump(messages))
@@ -55,8 +50,6 @@ namespace :stats do
   desc "Shows all profanity in the messages"
   task :profanity do
     words = %w{shit piss fuck cunt cocksucker motherfucker tits zomg omg wtf}.join("|")
-    LANGUAGES.each do |language|
-    end
     #system %{egrep -h '#{words}' commit*.yml | replace "  :message: " ""}
   end
 
