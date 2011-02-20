@@ -3,6 +3,7 @@ require 'yaml'
 require File.join(File.dirname(__FILE__), 'lib', 'github_repository_ripper')
 require File.join(File.dirname(__FILE__), 'lib', 'github_commit_ripper')
 
+LANGUAGES_TO_SEARCH = ['C', 'csharp', 'C++', 'Java', 'JavaScript', 'PHP', 'Python', 'Ruby']
 LANGUAGES = ['C', 'C#', 'C++', 'Java', 'JavaScript', 'PHP', 'Python', 'Ruby']
 
 namespace :rip do
@@ -10,7 +11,7 @@ namespace :rip do
   desc "Rip all repositories"
   task :repositories do
     pages_to_rip = 30
-    GitHubRepositoryRipper.rip_repositories(LANGUAGES, pages_to_rip)
+    GitHubRepositoryRipper.rip_repositories(LANGUAGES_TO_SEARCH, pages_to_rip)
   end
 
   desc "Rip all commits"
