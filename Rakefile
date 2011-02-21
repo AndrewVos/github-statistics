@@ -49,8 +49,27 @@ namespace :stats do
 
   desc "Shows all profanity in the messages"
   task :profanity do
-    words = %w{shit piss fuck cunt cocksucker motherfucker tits zomg omg wtf}.join("|")
-    #system %{egrep -h '#{words}' commit*.yml | replace "  :message: " ""}
+    words = %w{shit piss fuck cunt cocksucker motherfucker tits}
+    profanity = {}
+    commit_message_count = 0
+    profanity_count = 0
+    Dir.glob("language-commits*.yml").each do |file|
+      language = file.match(/\[(.+)\]/).captures[0]
+      profanity[language] ||= 0
+      contents = File.read(file)
+      contents.split(" ").each do |word|
+        if words.include?(word)
+          profanity[language] += 1
+          profanity_count += 1
+        elsif word == ":message:"
+          commit_message_count +=1
+        end
+      end
+    end
+    puts "Keys   " +  profanity.map{|k,v| v}.join(" ")
+    puts "Values " +profanity.map{|k,v| k}.join(" ")
+    puts profanity
+    puts "#{commit_message_count}/#{profanity_count}"
   end
 
   desc "Show all messages ordered by their frequency"
