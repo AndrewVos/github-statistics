@@ -54,20 +54,27 @@ namespace :stats do
     commit_message_count = 0
     profanity_count = 0
     messages_with_profanity = []
+    word_frequency = {}
     Dir.glob("language-commits*.yml").each do |file|
       language = file.match(/\[(.+)\]/).captures[0]
       profanity[language] ||= 0
       YAML.load_file(file).each do |message|
         message[:message].split(" ").each do |word|
+          word.downcase!
           if words.include?(word)
             profanity[language] += 1
             profanity_count += 1
+            word_frequency[word] ||= 0
+            word_frequency[word] += 1
             messages_with_profanity << message[:message]
           elsif word == ":message:"
             commit_message_count +=1
           end
         end
       end
+    end
+    File.open('profanity_word_frequency.yml', 'w') do |file|
+      file.write(YAML.dump(word_frequency))
     end
     File.open('profanity.yml', 'w') do |file|
       file.write(YAML.dump(messages_with_profanity))
