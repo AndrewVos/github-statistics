@@ -50,6 +50,7 @@ namespace :stats do
   desc "Shows all profanity in the messages"
   task :profanity do
     words = %w{shit piss fuck cunt cocksucker motherfucker tits}
+    #words = %w{wtf omg roflcopter rofl lol zomg}
     profanity = {}
     commit_message_count = 0
     profanity_count = 0
