@@ -1,0 +1,499 @@
+--- 
+- moved some shit into ServiceStack.Redis
+- Fixed shit yo.
+- |-
+  How much fucking swearing do you want to bloody well have when the fuckin' shit is put in with the godamn commit messages
+  
+  Also, added new models
+- removal of shit skins
+- added gui shit
+- gui shit
+- Removed some old shit that shouldn't exist, cleaned the files up and fixed the bindings to point to the new data model, the database should function now
+- Fixing shit I broke
+- Cache sped way the fuck up, caves implemented again, as well as LAVA SEAS
+- |-
+  Quick commit before I lose power again.
+  
+   * Block replacements moved to Edit > Replace...
+   * Replacement templates ready to go.
+   * More copyright shit
+   * Added some tweaks for the dial UI
+   * TileEntities dynamically loaded, also create new class files on unknown entities.
+   * (Tile)Entity stuff moved to folders underneath /bin/
+   * All entities support OnGround now.
+   * Better TileEntity detection
+  
+  Signed-off-by: N3X15 <nexisentertainment@gmail.com>
+- Complete UI rewrite for the fucking map dialog, since VS2010 crapped on it.  New Dial control for time editing, and lots of shit is broken now.
+- holy shit changes
+- bunch of shit was deleted
+- make this shit work!
+- Added some functionality; naming shit and etc
+- Hack changes that tries to make team shit to work
+- Removed xml and shit from the repo
+- Removed some shit
+- okay, duh.  the timeout shit didn't work at all.
+- |-
+  - remove old test code stub. I have no idea how this ugly piece of shit managed to survive *that* long.
+  
+  git-svn-id: https://assimp.svn.sourceforge.net/svnroot/assimp/trunk@874 67173fc5-114c-0410-ac8e-9d2fd5bffc1f
+- " * Fixing up the little docs there are, and created a viewer dock window for them. However it looks like this is going to require a fuck ton of libs to parse the compiled help. Will most likely just delay issue 98 and wait for qt 4.6 to fix this mess.\n\n\
+  git-svn-id: http://dwarftherapist.googlecode.com/svn/trunk@270 f34a0644-6cda-11de-9313-dd366511c2ff"
+- " * fixed GameDataReader to return alpha-sorted skills and labors\n * more work on the unified view editing interface (mostly done now but still needs some work)\n * I FUCKING HATE THE CURRENT ViewManager->GridView->ViewColumnSet->ViewColumn HIERARCHY! It badly needs to be rewritten from scratch. Possibly using QAbstractItemModel as the basis? It is an absolute pain to deal with and is now about 1000 lines of total shit code.\n\n\
+  git-svn-id: http://dwarftherapist.googlecode.com/svn/trunk@255 f34a0644-6cda-11de-9313-dd366511c2ff"
+- |-
+  stupid bug, I bet this cost me over 8 hours of stupid shit in the last week. read_str2 was still using read_int32() to read strings.
+  Meaning about half of my string reads would fail due to over-run integers. switched to read_uint()
+  
+  
+  git-svn-id: http://dwarftherapist.googlecode.com/svn/trunk@183 f34a0644-6cda-11de-9313-dd366511c2ff
+- |-
+  git == shit
+  
+  encore une fois erase by pull
+  
+  re-envoie la lib image.
+- Removing shit shortcut
+- |-
+  Essentially got terrain working. The geometry generation is still wrong and I need to add in a mode that updates in one fell swoop, rather than as we go (for loading and generation), but the basics are there.
+  
+  Fixed a few bugs where I was using the wrong variables for what I wanted to do (grid index v. chunk index v. world pos v. chunk grid location v. local chunk index, etc... shit got confusing).
+  Fixed some issues with my macros and matrix lookups.
+  Renamed some variables in an attempt to make things less confusing.
+- ignoring common text editor tmp files and shit
+- cleanup bundler shit
+- |-
+  Start modifying the API and breaking the fuck out of everything
+  
+  Signed-off-by: Dario Freddi <drf@kde.org>
+- |-
+  What the fuck
+  
+  Signed-off-by: Dario Freddi <drf54321@gmail.com>
+- |-
+  What the shit pt 2
+  
+  Signed-off-by: Dario Freddi <drf54321@gmail.com>
+- |-
+  What the shit
+  
+  Signed-off-by: Dario Freddi <drf54321@gmail.com>
+- |-
+  Clearing up hacks & shit
+  
+  Signed-off-by: Dario Freddi <drf54321@gmail.com>
+- |-
+  Get the fuck out, authenticator
+  
+  Signed-off-by: Dario Freddi <drf54321@gmail.com>
+- |-
+  Tile-scope and Particle-scope now working. Proper VAO/Shader rendering in progress...
+  
+  Also, the ARB can go fuck themselves... :)
+- Some .mrc upgrades. Changing something this simple has already been a pain in the ass. Looking for someone who has been scripting mIRC for over 9000 years and would be able to pimp the shit out of this script.
+- needs more constructors (btw, I don't actually know C++ so feel free to revert / change shit entirely
+- add container_id and orphaned_item to cat_uuids so weird shit doesn't happen
+- fixing preferences and shit
+- add container_id and orphaned_item to cat_uuids so weird shit doesn't happen
+- fixing preferences and shit
+- Removed DataManager because it was shit anyway.
+- gcc shit
+- |-
+  Workaround v8 bugs with small stacks
+  
+  v8 seems to have some issues when you try and use stack sizes smaller
+  than it's used to.
+  
+  First is that if you attempt to set a stack limit that's smaller than
+  the snapshot size (if enabled) it will crash your shit in a very hard to
+  understand way. Unfortunately there's no way to actually know what that
+  magic size is in advance, so I'm just using a secret v8 internal
+  variable. This means that for most systems each coroutine will consume
+  ~320kb of memory.
+  
+  Second issue is there's a bug on 64 bit platforms when your Javascript
+  overflows the stack. It's probably pretty hard to hit this bug in
+  regular code but it's still quite bad. There's a workaround that I'm
+  using to get past that.
+- ui = shit
+- fixing sush shit
+- fixing greg shit
+- &id001 |-
+  Fix the dead man don't throw all his card bug
+  
+  1. Don't ignore the answer of Pangde's Mengjin skill
+  2. Don't invoke Jianxiong skill when the card(s) contains shit
+  3. Add a confirmation when the judge card is shit on Tiandu skill
+  4. Fix the analeptic slash problem
+- *id001
+- |-
+  Add extension package selection for game server
+  
+  1. Move Yitian sword & shit to YitianPackage
+  2. Update the pixmap of yitian sword
+  3. Remove the lord count of settings
+  4. Add user name length limitation
+- |-
+  Add class CardPattern, shit card and etc
+  
+  1. Add a global instance of class Client : "ClientInstance", thus many client pointer parameter is no longer needed
+  2. Add equipped field for class CardItem
+  3. Removed field view_card_item for class CardItem
+  4. Removed availability for class Client
+  4. Removed toggleable boolean flag for class Skill
+- |-
+  Crude fix for track asyncronous shit
+  
+  
+  git-svn-id: svn+ssh://svn.last.fm/svn/clientside/trunk/desktop@122768 ab8f4a45-97f9-0310-bbd1-854ce3dcee89
+- |-
+  Menu item for XSPF resolution. Misc fixes. Prevent UI sticking in play mode ever again hopefully. But Phonon is so shit I can't guarentee much. startAgain() function ready to rumblr.
+  
+  
+  git-svn-id: svn+ssh://svn.last.fm/svn/clientside/trunk/desktop@121423 ab8f4a45-97f9-0310-bbd1-854ce3dcee89
+- |-
+  GCC is different regarding visibility shit than windows is apparently
+  Also differs in handling between Mac and Ubuntu typically
+- Added bridge shit for later dickings.
+- LL can't even write a fucking installer, what the fuck
+- |-
+  Missing shit
+  
+  git-svn-id: file:///home/nexis/Documents/luna-mirror/trunk@228 97ece4ad-cae2-4924-842c-0ef94757c1ff
+- |-
+  * Merged with latest Emerald release
+  * Added Missing shit
+  *** PROBABLY BROKEN ***
+  
+  
+  
+  git-svn-id: file:///home/nexis/Documents/luna-mirror/trunk@212 97ece4ad-cae2-4924-842c-0ef94757c1ff
+- |-
+  Missing shit
+  
+  git-svn-id: file:///home/nexis/Documents/luna-mirror/trunk@135 97ece4ad-cae2-4924-842c-0ef94757c1ff
+- |-
+  Switching to Swig, fuck tolua.
+  
+  git-svn-id: file:///home/nexis/Documents/luna-mirror/trunk@62 97ece4ad-cae2-4924-842c-0ef94757c1ff
+- |-
+  Core:
+  	* Assemblage with boost versions "a shit of a mammoth" is corrected
+- Our shit
+- Finished Implementation but this shit still kinda breaks.
+- Fixed and commentet out pauls shit untill he will fix that.
+- fuck it.  let's release
+- Added some code to make outline fonts faster.  While the rendering is faster, it's still not acceptable.  On iOS, it's like Pushing shit up hill with some of these typefaces...
+- moved some lines of shit
+- |-
+  Use the Soup encode API for the users/show call
+  
+  The email address used to perform the look up of the user must
+  be properly escape, or Twitter will shit itself and return a
+  404 page instead of a proper 4xx HTTP code.
+- |-
+  Escape bare '&' in the statuses text
+  
+  Some Twitter clients do not escape bare '&' with '&amp;', so we need
+  to go as far as employing GRegex to replace them ourselves and not let
+  the Pango markup parser shit itself when it encounters a bare ampersand.
+- |-
+  Changed textarea font default to Consolas
+  
+  Under Windows, terminus.ttf doesn't include the prettiest low-res version of
+  Terminus (what the fuck are you doing people? It's ugly in the huge sizes! 10px
+  is where it's at!) so if a windows user has this font installed, it will look
+  ugly. So stick with the Consolas as a reasonable default instead.
+- No need to scream the legal shit
+- Clean up some old shit that was in place from Aaron's not-fast-enough-python app, it was commented out, but should have been removed, so is. By default now, datalog packets have new info in them, and the stream will only be continuous while the engine is running, probably at higher rpms, but unsure. To get a stream, substitute TRUE in place of the expression in main.c.
+- Use BUG_ON for bogus shit
+- |-
+  Use list_entry() since converting struct page to use list_head
+  
+  Dunno how the fuck this was working before...
+- |-
+  Pass entire trap/exception context to C code
+  
+  printk more data for debugging purposes, since exception handling does fuck
+  all at the moment anyway
+- |-
+  Merge branch 'master' of git://github.com/Bluerise/openiBoot
+  
+  * 'master' of git://github.com/Bluerise/openiBoot:
+    Re-added DMA. This time it should be fixed completely.
+    I KNEW this would fuck us at some point. Use the *.bin now.
+- I KNEW this would fuck us at some point. Use the *.bin now.
+- "clcd: Hopefully malloc will never fuck up. Else fallback to standard framebuffer addresses"
+- Commented resetting GPIO as it'd fuck our framebuffer hook.
+- + shit to Makefile
+- removed utf-mutilating shit
+- |-
+  removed another depricated reference to old usb shit
+  
+  removed HardwareUsb usb in example main, as that class hasnt been defined yet
+  also modded the makefile to actually compile main.cpp
+- |-
+  Use the new git__joinpath to build paths in methods
+  
+  The `git__joinpath` function has been changed to use a statically
+  allocated buffer; we assume the buffer to be 4096 bytes, because fuck
+  you.
+  
+  The new method also supports an arbritrary number of paths to join,
+  which may come in handy in the future.
+  
+  Some methods which were manually joining paths with `strcpy` now use the
+  new function, namely those in `index.c` and `refs.c`.
+  
+  Based on Emeric Fermas' original patch, which was using the old
+  `git__joinpath` because I'm stupid. Thanks!
+  
+  Signed-off-by: Vicent Marti <tanoku@gmail.com>
+- |-
+  Update copyright notice.
+  
+  fuck me sideways i've been working on this thing for a while
+  doesn't really feel like three years (more like two honestly) when
+  you're looking back at it
+- |-
+  Remove waitUntilExit as it  causes exceptions if a QCPlugin is stopped and quickly restarted. Since NO ONE waits, we can safely tell the background app to fuck off and not worry about it.
+  
+  git-svn-id: https://openemu.svn.sourceforge.net/svnroot/openemu/branches/iosurface@802 a16923d9-94c8-4a39-ae78-11df2d60a2ba
+- |-
+  Added DO protocol for delegate methods, added control/button release/pressing data. Added a shit psuedo controller UI to Debug App. 
+  
+  git-svn-id: https://openemu.svn.sourceforge.net/svnroot/openemu/branches/iosurface@686 a16923d9-94c8-4a39-ae78-11df2d60a2ba
+- fuck autoconf
+- fuck it, roll our own socketpairs
+- change the way time accel auto-down-thingying works so red giants and other large radius objects don't fuck things up
+- fix shader loading problem on win32... I hate stdlib's newline shit
+- |-
+  fix more not closing files. what the fuck was i on when i wrote this code???
+  
+  git-svn-id: https://pioneer.svn.sourceforge.net/svnroot/pioneer/trunk@692 e632f14b-6550-0410-b89e-a82653faca30
+- |-
+  So... many... changes...
+  
+  - Started fleshing out the readme a bit more. It's still a piece of shit though.
+  - Removed obsolete includes.
+  - Added vanity bytes.
+  - Cleaned up the unlikely macro.
+  - Made in_bounds into a macro to work with size_t as well as pointers.
+  - Started using in_bounds more liberally in check_invariants.
+  - Expanded the pipe_*_new function implementations.
+  - Littered the code with branch prediction.
+  - Added the pipe_ prefix to ALL exported symbols.
+- |-
+  cleaned up a lot of shit with initializers, moved some code into Utils. fixed some inconsistencies with the ruby path. gave up on the ruby autowatch approach. started to write my own filewatch but I think I'm gonna ditch it because the built in max object works fine.
+  
+  git-svn-id: svn://quagmire/repo/max/externals/java/src/ajm@153 99bd3f52-245c-3848-8005-63e5fbd5b414
+- "Source update only: Modified the ConnectionSpec.RefImpl property setter methods to use method chaining pattern.  Breaks the Bean contract but fuck it."
+- Ok, shit from testing
+- o now you may build with spring 3.x and 2.5.6 by setting 2 system props when building. next step is to profile da shit
+- better transfers between SkTreeMaps, and take care of a shit load of corner cases :/
+- Moved a bunch of shit into subdirectories
+- well, that shit works
+- some shit with structure scope captures
+- fuck up paths a bit less
+- weird shit
+- skipping shit
+- |-
+  what the fuck is coding?
+  
+  minor fixes to the overlay selectors added
+- fixing shit that broke
+- can't throw exception, shit fails on windows
+- |-
+  ads: add AdMob ads to top of threads list and comments list
+  
+  Did not want to piss people off too much by putting at bottom
+  where the next 25/prev 25 buttons are
+- |-
+  There is both success and failure here.
+  
+  My intent was to move some of the basic sinatra logic to rspec, mostly
+  to demonstrate some of the cooler methods in the DSL, but then I
+  noticed that the 500 posts test was dog slow in rspec, mostly because
+  capybara does its remote testing in an actual browser.  This will be
+  yet another thing to piss CI off.  There doesn't seem to be a way to
+  specify :htmlunit as the browser for the selenium driver to use,
+  though if you could you'd do it in that new code in spec_helper.rb.
+  Another option would be to use selenium's :remote browser option,
+  after starting up say the HtmlUnitDriver driver in another process.
+  Or we could use the celerity driver, but that doesn't seem to work
+  well with 0.4.0.  So we have a firefox window pop up during our rspec
+  tests for now.
+- It might be hard to tell but I fixed plugins not loading on startup. And all this formatting - fuck sakes. All the javadocs too... ugh.
+- fuck this again 2
+- added submit button so enter key triggers submit event, but make the button completely opaque so it doesn't look like shit
+- use bundler08 over bundler until they sort their shit out
+- use bundler08 over bundler until they sort their shit out
+- Updated colors to look less like a pile of shit on a white background
+- fuck wtf
+- big fuck around reorg
+- permalinks now work; removed legacy urls / fuck it
+- fix for spec fuck up
+- eventSupported was being called but was undefined so I added that shit
+- eventSupported was being called but was undefined so I added that shit
+- fixed non binding xhr regexp so it wont fuck up when url has position defining like strings
+- another shit hot rem merge
+- |-
+  Compressed the shit out of the code (also enclosed in self invoking fn to help compression)
+  Removed .first() dependancies
+  Moved some private methods in to private closure to help compression
+  Changed XUI so that xui and x$ are the same thing, i.e. self creating object (by passing prototype to find)
+- |-
+  Merge branch 'feature-attachments'
+  
+  * feature-attachments:
+    return req from saveAttachment()
+    allows creating an attachment for a non-existant document
+    Saving attachments now updates the cache
+    Basic support for GETting attachments
+    add streaming support for putting attachments
+    save attachment should take a callback
+    argh fuck
+    more with the attachment support
+    basic PUT support, assuming we have all the attachment data present
+- argh fuck
+- argh fuck
+- argh fuck people include your .gitmodules
+- (dist) fuck I always forget to update this version number
+- fuck the buffer
+- |-
+  removed String.toElement - its shit
+  
+  git-svn-id: http://svn.danwebb.net/external/lowpro/trunk@253 a686c101-5f17-0410-80e1-b267258107f6
+- |-
+  more readme shit
+  
+  git-svn-id: http://svn.danwebb.net/external/lowpro/trunk@110 a686c101-5f17-0410-80e1-b267258107f6
+- Chris does not want to hear your shit
+- more awesome shit
+- Maybe I shouldn't shit talk IE quite so much in my publicly released code...
+- Adding more code to the demo to get this shit up and running.
+- fuck all the tests, you're going to have to live without them
+- motherfucker
+- Fixed shit
+- more shit
+- Fixed the shit
+- ericflo fails at fixing my shit
+- do a proper blur (why the fuck doesn't the jquery().blur() do it?
+- added new tests for new shit
+- "Made memoryReader/memoryWriter pointers to the actual memory arrays, unfortunately safari and google chrome still JIT this shit horribly. \xE0\xB2\xA0_\xE0\xB2\xA0"
+- Made a secondary audio buffer for webkit audio so it works properly now, though it still sounds like shit because the webkit_audio build still is slow as crap.
+- Make shit work
+- shit
+- even more awesome UI shit
+- even more awesome UI shit
+- more awesome UI shit
+- added a bunch of ostatus shit
+- removed console.logs to it doesn't fuck up other browsers
+- |-
+  Stream and Buffer based read/write loop.
+  
+  - We moved to sendfile before node.JS had binary buffers. A read write
+    loop is a lot faster now than back when node was converting everything
+    to UTF-8 strings. Sendfile isn't needed.
+  
+  Sendfile(2) was causing all sorts of hassles
+  - Connections would timeout, then sendfile would try and send out a null
+    file descriptor
+  - Sendfile(2) has crap error messages for when the shit hits the fan.
+    'bad argument'
+- Changed port number due to conflict with some PHP server shit
+- Holy shit that was painful
+- note this shit is way broken on current node.js
+- last commit breaks shit
+- Cleaning the house ... shit was messy\!
+- Changing format to sf_format template variable and putting back menuItem because I think it's going to piss too many people off (including me)
+- removed all pycs during console examples running. why the fuck it happens?
+- fuck git
+- Removed old Build App shit
+- get rid of this build shit
+- some clever shit
+- testing shit
+- more info and methods, less bare shell shit
+- alert users that they're  already running rvm and shit gets weird
+- minor shit to hopefully get some help debugging on irc
+- chunk of shit i wrote over whiskey
+- i really hate the behavior of this shit
+- removing postgres for now since it seems to do weird shit on new systems
+- move away from adding shit to people's ~/.profile and have the normal recipes append and source the cider env if needed
+- "If multiple security groups were given, they'd piss on each others shoes: the full list of authorizes was used for each one, and revokes were always generated with the cloud's proper name, not the name of the security group to revoke"
+- &id002 |-
+  Removing bundler stuff until I can figure out a better way to add it
+  
+  Preferable one that doesnt fuck shit up!!
+- *id002
+- Rake sucks! Rake is piece of shit and it's broken again! Fuck you guys!
+- fuck raise and slowness
+- Remove ridiculous newbie shit
+- Ignore this folder where I put shit I don't want in source control but don't want to delete yet.
+- fuck LOAD_PATH
+- |-
+  fucking awesome svn full_url shit
+  
+  git-svn-id: http://activereload.svn.engineyard.com/warehouse/trunk@2290 8456e5f2-bb15-0410-bd20-b44782a1fb1e
+- |-
+  Fix sheet shit
+  
+  git-svn-id: http://activereload.svn.engineyard.com/warehouse/trunk@1753 8456e5f2-bb15-0410-bd20-b44782a1fb1e
+- We reset the session or some shit now, it's nil
+- Clean some more tests. This one might break things but fuck you
+- Clean up more specs by commenting out shit
+- "Hotfix ( monkeypatch !! ) for rspec (from rspec-edge) : stupid fucking fuck shit fuck you anyway stub! doesn't work on controllers unless you have this"
+- "Hotfix ( monkeypatch !! ) for rspec (from rspec-edge) : stupid fucking fuck shit fuck you anyway stub! doesn't work on controllers unless you have this"
+- "Hotfix ( monkeypatch !! ) for rspec (from rspec-edge) : stupid fucking fuck shit fuck you anyway stub! doesn't work on controllers unless you have this"
+- Config.gem now needs to be strings, (rails 2.3+) so fuck you
+- Minor test cleanup. Hackish, but fuck you.
+- fuck it, process all old statuses when you make a new one.
+- shit works, rollbacks implemented
+- Raise if somebody is using Oracle or SQLite or some shit (ReinH).
+- dont fuck with your original options hash
+- |-
+  Fix whitespace errors across all source files and tests
+  
+  > I can't stand this shit anymore.
+  -- Mr. Middleware in 60d5006
+- |-
+  Fix whitespace errors across all source files and tests
+  
+  I can't stand this shit anymore.
+  -- RMT in 60d5006
+- More shit that makes Arx easier to explain, for RubyConf.
+- |-
+  Moved a bunch of shit into a folder called other_shit. This is stuff I'm not using for Burning
+  Man but have used in the past and might need later. (In fact the ambient files I'm probably moving
+  back out of other_shit again.)
+  
+  Also created very simple ambient music file which does nothing except tour the circle of fifths.
+- &id003 |-
+  I'm committing all this strictly for historical purposes. This code sucks. It blew up
+  on me in Toronto. Actually it didn't. But it could have. It represents serious hackery
+  perpetrated in hopes of automating Ableton Live. It successfully automates Live but
+  doesn't sound that great.
+  
+  The drums-only stuff is better. For Burning Man I'm going with drums only. And possibly
+  adding new features tonight and/or tomorrow. So I'm stashing all this in git just in case,
+  before I destroy it, because I need to throw it all away in order to get the Burning Man
+  shit hooked up.
+  
+  To use this code, which you totally should not do, you need Ableton Live hooked up with
+  tracks on 10 channels, and each fader level hooked to a controller on channel 0. I think
+  I set it like controller 1, fader 1, through controller 10, fader 10, but I don't really
+  remember. There's probably some other shit in here I broke for no good reason.
+- *id003
+- decouple that shit baby
+- fuck it. I hate formatting syntaxes
+- i fixed this shit before, i guess i forgot to push
+- simplified the shit out of the gemspec
+- ConnectionFactory reset method added. coerce_to_connection_proxy method added to convert all kinds of shit to connection proxies. on_db method added, but not tested yet.
+- fuck you and your rubygems
+- that is some weird arity shit i don't understand
+- Leave it to Chelimsky to fuck up a simple name like Marston
+- |-
+  fuck
+  [git-p4: depot-paths = "//src/vlad/dev/": change = 4705]
+- "Release 2.1.8. Revert to DNSSD 0.7.1 until 1.0 can get it's shit sorted out (closes #12)"
+- "Jared says: this sentence is gramattically horse shit"
