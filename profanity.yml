@@ -25,6 +25,8 @@
   
   Signed-off-by: N3X15 <nexisentertainment@gmail.com>
 - Complete UI rewrite for the fucking map dialog, since VS2010 crapped on it.  New Dial control for time editing, and lots of shit is broken now.
+- LOL REPLACEMENTS AND SHIT
+- LOL REPLACEMENTS AND SHIT
 - holy shit changes
 - bunch of shit was deleted
 - make this shit work!
@@ -67,6 +69,18 @@
   
   Signed-off-by: Dario Freddi <drf@kde.org>
 - |-
+  Fuck that
+  
+  Signed-off-by: Dario Freddi <drf@kde.org>
+- |-
+  Fuck typos
+  
+  Signed-off-by: Dario Freddi <drf54321@gmail.com>
+- |-
+  Fuck me
+  
+  Signed-off-by: Dario Freddi <drf54321@gmail.com>
+- |-
   What the fuck
   
   Signed-off-by: Dario Freddi <drf54321@gmail.com>
@@ -76,6 +90,10 @@
   Signed-off-by: Dario Freddi <drf54321@gmail.com>
 - |-
   What the shit
+  
+  Signed-off-by: Dario Freddi <drf54321@gmail.com>
+- |-
+  Fuck activation, now it should work
   
   Signed-off-by: Dario Freddi <drf54321@gmail.com>
 - |-
@@ -127,12 +145,51 @@
   4. Fix the analeptic slash problem
 - *id001
 - |-
+  Add time limit for operations
+  
+  1. Slash is settled by action order
+  2. Add segment of "A Short Song" to about dialog
+  3. Fix Dongzhuo can use Jiuchi more than one time in a turn
+  4. Add volume settings
+  5. Zhuge Liang who is kongcheng can not be slashed by Blade
+  6. SavageAssault is not available when only Jiaxu is the only target
+  7. Replace the pixmap of Shit
+  8. Add show card to log system
+  9. When the luanwu target is only one, just select it other than ask the player to choose
+- |-
   Add extension package selection for game server
   
   1. Move Yitian sword & shit to YitianPackage
   2. Update the pixmap of yitian sword
   3. Remove the lord count of settings
   4. Add user name length limitation
+- |-
+  Complete the nullification system
+  
+  1. Add Card::onMove callback, thus card Shit can be used
+  2. Simplify the (Room::/Client::)askForSkillInvoke function
+  3. Add (Room::/Client::)askForChoice function, (Yinghun, Benghuai)
+  4. Add "Kanpo", make it available in nullification dialog
+  5. Only English letters and number can be used as the identifier
+  6.
+- |-
+  Implement Jianxiong skill and card Shit
+  
+  1. Implement Client::hpDamage
+  2. Add function Room::obtainCard & Room::setPlayerProperty
+  3. Remove RoomScene::startViewAsSkill
+  4. Add struct SlashEffectStruct
+- |-
+  Complete Wusheng skill
+  
+  1. Replace the whitespace (of card parsing string) to colon thus avoid bugs
+  2. Field "subcards" is a QList of int instead of const Card *, as it should only contains non-virtual cards
+  3. "discarded_list" now is a public data member of class Client instead of a private member of class RoomScene
+  4. Emit card_selected signal for pending card
+  5. Dashboard::getSelected() now returns "const Card *" instead of "CardItem *"
+  6. Removed "event_type" field of class Engine as well as related member functions
+  7. Player::MoveCard now can handle either side is discard pile
+  8. Move class Slash, Jink, Peach and Shit to "standard.h", and add Q_OBJECT and Q_INVOKABLE macros, thus we can dynamically create card
 - |-
   Add class CardPattern, shit card and etc
   
@@ -180,6 +237,10 @@
   Core:
   	* Assemblage with boost versions "a shit of a mammoth" is corrected
 - Our shit
+- |-
+  This is stupid!. Fuck you GIT!
+  
+  Signed-off-by: mrhooha <nonya@effing_beeezwax.gtfo>
 - Finished Implementation but this shit still kinda breaks.
 - Fixed and commentet out pauls shit untill he will fix that.
 - fuck it.  let's release
@@ -271,6 +332,7 @@
   fix more not closing files. what the fuck was i on when i wrote this code???
   
   git-svn-id: https://pioneer.svn.sourceforge.net/svnroot/pioneer/trunk@692 e632f14b-6550-0410-b89e-a82653faca30
+- Cleaned up all warnings. Normalized method names. General cleanup of model mapping API. Shit is getting slick and maintainable!
 - |-
   So... many... changes...
   
@@ -302,6 +364,17 @@
   
   minor fixes to the overlay selectors added
 - fixing shit that broke
+- Fuck it.  The path planner is mostly a waste of time.
+- |-
+  FUCK YES
+  
+  rictic you bastard, PriorityQueue.poll() removes the first element, and
+  it removed the best one before we even started searching.
+  
+  also, made a mathematically accurate heuristic, sorta.  Uses the secant
+  method to solve for the number of timesteps taken to reach 7 tiles to
+  the right under a full run.  this turns out to be a slight overestimate
+  for some unknown reason.
 - can't throw exception, shit fails on windows
 - |-
   ads: add AdMob ads to top of threads list and comments list
@@ -406,9 +479,32 @@
 - note this shit is way broken on current node.js
 - last commit breaks shit
 - Cleaning the house ... shit was messy\!
+- fixed bug with large integers and negative integers; FUCK OFF PHP!
 - Changing format to sf_format template variable and putting back menuItem because I think it's going to piss too many people off (including me)
 - removed all pycs during console examples running. why the fuck it happens?
 - fuck git
+- |-
+  Adding first bits of new tree-reordering.
+  
+  Renamed page_toolbox.js to fein_tree.js, Dragging and dropping is actually working now, saves properly\!
+  
+  Fuck Git. Now actually includes changed files.
+- |-
+  Add a couple sorts, and switch to sorted hooks.
+  
+  Fuck yes.
+- |-
+  Make generators auto-sorted.
+  
+  Fuck yeah.
+- |-
+  inventory, protocol: Wire up workbenches.
+  
+  Fuck yes!
+- |-
+  inventory: Dynamically allocate storage.
+  
+  Fuck yes.
 - Removed old Build App shit
 - get rid of this build shit
 - some clever shit
@@ -426,6 +522,7 @@
   
   Preferable one that doesnt fuck shit up!!
 - *id002
+- Rake sucks! Rake is piece of shit and it's broken again! Fuck you guys!
 - Rake sucks! Rake is piece of shit and it's broken again! Fuck you guys!
 - fuck raise and slowness
 - Remove ridiculous newbie shit
@@ -492,8 +589,30 @@
 - fuck you and your rubygems
 - that is some weird arity shit i don't understand
 - Leave it to Chelimsky to fuck up a simple name like Marston
+- Fuck SETI
 - |-
   fuck
   [git-p4: depot-paths = "//src/vlad/dev/": change = 4705]
+- |-
+  Fuck it. p4config wins by a LONG shot after using it.
+  
+  [git-p4: depot-paths = "//src/vlad/dev/": change = 3526]
+- |-
+  Back to the essences
+  
+  * Back to Markdown
+  * I suck at CSS, and I'd rather provide no CSS
+    than one that sucks.
+  * All that JS floating around is just unecessary bloat to me.
+  * No more title-case
+  * No more titleize
+  
+  After all, the point is to fork and DO WHAT THE FUCK YOU WANT
+  with it.
+  
+  Here is the song that inspired this commit:
+  <http://www.last.fm/music/Gravity/_/Back+To+The+Essence>
+- Fuck it. Jeweler 1.5.0.
+- Fuck yeah construct.
 - "Release 2.1.8. Revert to DNSSD 0.7.1 until 1.0 can get it's shit sorted out (closes #12)"
 - "Jared says: this sentence is gramattically horse shit"
