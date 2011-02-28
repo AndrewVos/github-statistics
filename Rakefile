@@ -3,7 +3,7 @@ require 'yaml'
 require File.join(File.dirname(__FILE__), 'lib', 'github_repository_ripper')
 require File.join(File.dirname(__FILE__), 'lib', 'github_commit_ripper')
 
-LANGUAGES_TO_SEARCH = ['C', 'csharp', 'C%2B%2B', 'Java', 'JavaScript', 'PHP', 'Python', 'Ruby']
+LANGUAGES_TO_SEARCH = ['C', 'csharp', 'C%2B%2B', 'Java', 'JavaScript', 'Perl', 'PHP', 'Python', 'Ruby']
 
 namespace :rip do
 
