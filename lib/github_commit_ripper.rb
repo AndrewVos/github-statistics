@@ -48,8 +48,8 @@ class GitHubCommitRipper
       json = nil
       while json == nil
         json = Net::HTTP.get(uri)
-        json = nil if json =~ /{"error":\["Rate Limit Exceeded for \d+.\d+.\d+.\d+"\]}/
-        return nil if json =~ /{"error":"Not Found"}/
+        json = nil if json =~ /"error":\["Rate Limit Exceeded for \d+.\d+.\d+.\d+"\]/
+        return nil if json =~ /"error":"Not Found"/
         sleep(1) if json == nil
       end
       json
